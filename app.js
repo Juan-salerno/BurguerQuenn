@@ -33,9 +33,9 @@ class Comida {
             <div class="col-md-8">
                 <div class="card-body">
                     <h5 class="card-title">${this.nombre}</h5>
-                    <p class="card-text">Cantidad: <button class="btn btn-dark" id="minus-${this.id}"><i class="fa-solid fa-minus fa-1x"></i></button>${this.cantidad}<button class="btn btn-dark" id="plus-${this.id}"><i class="fa-solid fa-plus"></i></button> </p>
+                    <p class="card-text">Cantidad: <button class="btn btn-dark" id="minus-${this.id}">-</button>${this.cantidad}<button class="btn btn-dark" id="plus-${this.id}">+</button> </p>
                     <p class="card-text">Precio: $${this.precio}</p>
-                    <button class="btn btn-danger" id="eliminar-${this.id}"><i class="fa-solid fa-trash"></i></button>
+                    <button class="btn btn-danger" id="eliminar-${this.id}">x<i class="fa-solid fa-trash"></i></button>
                 </div>
             </div>
         </div>
