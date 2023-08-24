@@ -26,7 +26,7 @@ class Comida {
   descripcionHTMLCarrito() {
     return `
     <div class="card mb-3" style="max-width: 540px;">
-        <div class="row g-0">
+        <div class="bg-warning row g-0">
             <div class="col-md-4">
                 <img src="${this.img}" class="img-fluid rounded-start" alt="...">
             </div>
@@ -35,7 +35,7 @@ class Comida {
                     <h5 class="card-title">${this.nombre}</h5>
                     <p class="card-text">Cantidad: <button class="btn btn-dark" id="minus-${this.id}">-</button>${this.cantidad}<button class="btn btn-dark" id="plus-${this.id}">+</button> </p>
                     <p class="card-text">Precio: $${this.precio}</p>
-                    <button class="btn btn-danger" id="eliminar-${this.id}">x<i class="fa-solid fa-trash"></i></button>
+                    <button class="btn btn-danger" id="eliminar-${this.id}"><img class="btn_eliminar " src="./assets/img/cross.png" alt=""></button>
                 </div>
             </div>
         </div>
@@ -44,7 +44,7 @@ class Comida {
 
   descripcionHTML() {
     return `
-    <div class="card d-flex" style="width: 18rem;">
+    <div class="bg-warning card d-flex" style="width: 18rem;">
     <img src="${this.img}"  width="200px" height="200px" class="card-img-top" alt="...">
     <div class="card-body">
       <h5 class="card-title">${this.nombre}</h5>
@@ -153,8 +153,8 @@ class Pedido {
         this.limpiarPedido()
         this.contenedor_comida.innerHTML = `<h3 class="text-center">Compra realizada con éxito!</h3>`
         this.total.innerHTML = "total" + "$:" + precioTotal
-        
-        
+
+
 
 
 
@@ -177,6 +177,23 @@ class ControladorComida {
     this.listaDeComidas.push(comida)
   }
 
+  async cargarComidas() {
+    try {
+      const response = await fetch('comidas.json');
+      const data = await response.json();
+
+      data.forEach(comidaData => {
+        const comida = new Comida(comidaData);
+        this.agregarComida(comida);
+      });
+
+      this.mostrarComida();
+    } catch (error) {
+      // No se necesita console.error aquí
+    }
+  }
+
+
 
   mostrarComida() {
     let lista_menu = document.getElementById("lista_menu");
@@ -186,24 +203,33 @@ class ControladorComida {
 
     this.listaDeComidas.forEach(comida => {
       let btn = document.getElementById(`ap-${comida.id}`)
-      btn.addEventListener("click", () => {
+      btn.addEventListener("click", (event) => {
+        event.preventDefault()
         pedido.agregarComida(comida)
         pedido.guardarEnStorage()
         pedido.mostrarComida()
-      })
+        Toastify({
+          text: "!Comida añadida!",
+          duration: 3000,
+          destination: "https://github.com/apvarun/toastify-js",
+          newWindow: true,
+          close: false,
+          gravity: "top", // `top` or `bottom`
+          position: "right", // `left`, `center` or `right`
+          stopOnFocus: true, // Prevents dismissing of toast on hover
+          style: {
+            background: "green",
+          },
+          onClick: function () { } // Callback after click
+        }).showToast();
 
+      })
     })
 
   }
 }
 
 
-const p1 = new Comida({ id: 1, nombre: "hamburguesa con chedar", precio: 600, descripcion: "chedar, doble carne y cebolla", img: "https://assets.unileversolutions.com/recipes-v2/209910.jpg" })
-const p2 = new Comida({ id: 2, nombre: "hamburguesa doble chedar", precio: 800, descripcion: "doble chedar, triple carne y baicon", img: "https://www.infobae.com/new-resizer/IGVNt_OwhVuJnBWHh2OknRaxNIY=/1200x900/filters:format(webp):quality(85)/arc-anglerfish-arc2-prod-infobae.s3.amazonaws.com/public/4E7AO7Q6I5BULNYYH3SSO4WP2Y.jpeg" })
-const p3 = new Comida({ id: 3, nombre: "hamburguesa especial", precio: 1000, descripcion: "carne, tomate, lechuga y pepino", img: "https://www.saborvenezolanokendall.com/cdn/shop/products/HAMBURGUESAESPECIAL3-min_2400x.jpg?v=1612293532" })
-const p4 = new Comida({ id: 4, nombre: "papas fritas comunes", precio: 400, descripcion: "papas fritas comunes", img: "https://www.clarin.com/img/2023/01/24/V6Zed1p80_2000x1500__1.jpg" })
-const p5 = new Comida({ id: 5, nombre: "papas fritas con chedar", precio: 500, descripcion: "papas fritas con chedar", img: "https://www.comedera.com/wp-content/uploads/2022/11/papas-fritas-con-queso-cheddar-PG_PFCQCY30320002.jpg" })
-const p6 = new Comida({ id: 6, nombre: "papas fritas con crema", precio: 600, descripcion: "papas con crema", img: "https://locosxlaparrilla.com/wp-content/uploads/2015/02/Receta-recetas-locos-x-la-parrilla-locosxlaparrilla-receta-papas-fritas-queso-crema-verdeo-panceta-papas-fritas-queso-crema-2.jpg" })
 
 const pedido = new Pedido()
 pedido.cargarStorage()
@@ -212,14 +238,8 @@ pedido.finalizarPedido()
 
 
 
-const CC = new ControladorComida()
-
-CC.agregarComida(p1)
-CC.agregarComida(p2)
-CC.agregarComida(p3)
-CC.agregarComida(p4)
-CC.agregarComida(p5)
-CC.agregarComida(p6)
+const CC = new ControladorComida();
+CC.cargarComidas();
 
 CC.mostrarComida()
 

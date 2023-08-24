@@ -1,0 +1,45 @@
+[
+    {
+      "id": 1,
+      "nombre": "hamburguesa con chedar",
+      "precio": 600,
+      "descripcion": "chedar, doble carne y cebolla",
+      "img": "https://assets.unileversolutions.com/recipes-v2/209910.jpg"
+    },
+    {
+      "id": 2,
+      "nombre": "hamburguesa doble chedar",
+      "precio": 800,
+      "descripcion": "doble chedar, triple carne y baicon",
+      "img": "https://www.infobae.com/new-resizer/IGVNt_OwhVuJnBWHh2OknRaxNIY=/1200x900/filters:format(webp):quality(85)/arc-anglerfish-arc2-prod-infobae.s3.amazonaws.com/public/4E7AO7Q6I5BULNYYH3SSO4WP2Y.jpeg"
+    },
+    {
+      "id": 3,
+      "nombre": "hamburguesa especial",
+      "precio": 1000,
+      "descripcion": "carne, tomate, lechuga y pepino",
+      "img": "https://www.saborvenezolanokendall.com/cdn/shop/products/HAMBURGUESAESPECIAL3-min_2400x.jpg?v=1612293532"
+    },
+    {
+      "id": 4,
+      "nombre": "papas fritas comunes",
+      "precio": 400,
+      "descripcion": "papas fritas comunes",
+      "img": "https://www.clarin.com/img/2023/01/24/V6Zed1p80_2000x1500__1.jpg"
+    },
+    {
+      "id": 5,
+      "nombre": "papas fritas con chedar",
+      "precio": 500,
+      "descripcion": "papas fritas con chedar",
+      "img": "https://www.comedera.com/wp-content/uploads/2022/11/papas-fritas-con-queso-cheddar-PG_PFCQCY30320002.jpg"
+    },
+    {
+      "id": 6,
+      "nombre": "papas fritas con crema",
+      "precio": 600,
+      "descripcion": "papas con crema",
+      "img": "https://locosxlaparrilla.com/wp-content/uploads/2015/02/Receta-recetas-locos-x-la-parrilla-locosxlaparrilla-receta-papas-fritas-queso-crema-verdeo-panceta-papas-fritas-queso-crema-2.jpg"
+    }
+  ]
+  
